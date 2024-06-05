@@ -52,7 +52,7 @@ partial class Form1
         btnCancelAsync.Location = new Point(11, 43);
         btnCancelAsync.Margin = new Padding(2);
         btnCancelAsync.Name = "btnCancelAsync";
-        btnCancelAsync.Size = new Size(308, 34);
+        btnCancelAsync.Size = new Size(272, 34);
         btnCancelAsync.TabIndex = 2;
         btnCancelAsync.Text = "Cancel Process";
         btnCancelAsync.UseVisualStyleBackColor = true;
@@ -79,9 +79,9 @@ partial class Form1
         btnDownloadAndDisplayAsync.Location = new Point(133, 7);
         btnDownloadAndDisplayAsync.Margin = new Padding(2);
         btnDownloadAndDisplayAsync.Name = "btnDownloadAndDisplayAsync";
-        btnDownloadAndDisplayAsync.Size = new Size(186, 32);
+        btnDownloadAndDisplayAsync.Size = new Size(150, 32);
         btnDownloadAndDisplayAsync.TabIndex = 5;
-        btnDownloadAndDisplayAsync.Text = "Download and Display Async";
+        btnDownloadAndDisplayAsync.Text = "Download Parallel Async";
         btnDownloadAndDisplayAsync.UseVisualStyleBackColor = true;
         // 
         // txtExecutionTime

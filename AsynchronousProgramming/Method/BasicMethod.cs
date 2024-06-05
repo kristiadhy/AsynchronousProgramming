@@ -9,7 +9,9 @@ internal static class BasicMethod
         "https://www.yahoo.com",
         "https://www.google.com",
         "https://www.microsoft.com",
-        "https://www.cnn.com"
+        "https://www.amazon.com",
+        "https://www.facebook.com",
+        "https://www.twitter.com",
         ];
 
         return websiteUrl;
@@ -29,10 +31,11 @@ internal static class BasicMethod
         //2.Google
         //3.Microsoft
         //4.Cnn
+        //...
         foreach (string websiteUrl in websiteUrlList)
         {
             //Get the result of each downloaded
-            var websiteContent = await DownloadWebsiteFromUrl(websiteUrl, client);
+            var websiteContent = await DownloadWebsiteFromUrlAsync(websiteUrl, client);
             //Put it in the website list
             websiteList.Add(websiteContent);
 
@@ -58,7 +61,8 @@ internal static class BasicMethod
         int progressPercentage = 0;
 
         //Download website asynchronously from website url list and save the task to the IEnumerable
-        IEnumerable<Task<WebsiteModel>> downloadWebsiteTaskFromQuery = from webisteUrl in websiteUrlList select DownloadWebsiteFromUrl(webisteUrl, client);
+        //Reference link: https://learn.microsoft.com/en-us/dotnet/csharp/asynchronous-programming/start-multiple-async-tasks-and-process-them-as-they-complete
+        IEnumerable<Task<WebsiteModel>> downloadWebsiteTaskFromQuery = from webisteUrl in websiteUrlList select DownloadWebsiteFromUrlAsync(webisteUrl, client);
         //Set the task to list
         List<Task<WebsiteModel>> downloadWebsiteTask = downloadWebsiteTaskFromQuery.ToList();
 
@@ -86,7 +90,7 @@ internal static class BasicMethod
         }
     }
 
-    public static async Task<WebsiteModel> DownloadWebsiteFromUrl(string websiteURL, HttpClient client)
+    public static async Task<WebsiteModel> DownloadWebsiteFromUrlAsync(string websiteURL, HttpClient client)
     {
         WebsiteModel website = new();
         website.WebsiteUrl = websiteURL;

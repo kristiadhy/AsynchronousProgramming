@@ -17,16 +17,30 @@ public partial class Form1 : Form
 
     private async Task BtnAsynchronous_Click(object? sender, EventArgs e)
     {
+        txtExecutionTime.ResetText();
+        var watch = System.Diagnostics.Stopwatch.StartNew();
+
         Progress<ProgressStatusReport> progress = new();
         progress.ProgressChanged += ReportProgress;
         await BasicMethod.DownloadAsync(progress);
+
+        watch.Stop();
+        var elapsedMs = watch.ElapsedMilliseconds;
+        txtExecutionTime.Text = $"{elapsedMs}";
     }
 
-    private async Task BtnAsynchronousParallel_Click(object s, EventArgs e)
+    private async Task BtnAsynchronousParallel_Click(object? s, EventArgs e)
     {
+        txtExecutionTime.ResetText();
+        var watch = System.Diagnostics.Stopwatch.StartNew();
+
         Progress<ProgressStatusReport> progress = new();
         progress.ProgressChanged += ReportProgress;
         await BasicMethod.DownloadParallelAsync(progress);
+
+        watch.Stop();
+        var elapsedMs = watch.ElapsedMilliseconds;
+        txtExecutionTime.Text = $"{elapsedMs}";
     }
 
     private void ReportProgress(object? sender, ProgressStatusReport e)

@@ -33,6 +33,8 @@ partial class Form1
         prgBar = new ProgressBar();
         txtResult = new TextBox();
         btnDownloadAndDisplayAsync = new Button();
+        txtExecutionTime = new TextBox();
+        label1 = new Label();
         SuspendLayout();
         // 
         // btnDownloadAsync
@@ -69,7 +71,7 @@ partial class Form1
         txtResult.Margin = new Padding(2);
         txtResult.Multiline = true;
         txtResult.Name = "txtResult";
-        txtResult.Size = new Size(544, 157);
+        txtResult.Size = new Size(544, 127);
         txtResult.TabIndex = 4;
         // 
         // btnDownloadAndDisplayAsync
@@ -82,11 +84,30 @@ partial class Form1
         btnDownloadAndDisplayAsync.Text = "Download and Display Async";
         btnDownloadAndDisplayAsync.UseVisualStyleBackColor = true;
         // 
+        // txtExecutionTime
+        // 
+        txtExecutionTime.Location = new Point(140, 213);
+        txtExecutionTime.Name = "txtExecutionTime";
+        txtExecutionTime.ReadOnly = true;
+        txtExecutionTime.Size = new Size(179, 23);
+        txtExecutionTime.TabIndex = 6;
+        // 
+        // label1
+        // 
+        label1.AutoSize = true;
+        label1.Location = new Point(12, 216);
+        label1.Name = "label1";
+        label1.Size = new Size(122, 15);
+        label1.TabIndex = 7;
+        label1.Text = "Total Execution Time :";
+        // 
         // Form1
         // 
         AutoScaleDimensions = new SizeF(7F, 15F);
         AutoScaleMode = AutoScaleMode.Font;
         ClientSize = new Size(560, 270);
+        Controls.Add(label1);
+        Controls.Add(txtExecutionTime);
         Controls.Add(btnDownloadAndDisplayAsync);
         Controls.Add(txtResult);
         Controls.Add(prgBar);
@@ -106,4 +127,6 @@ partial class Form1
     private ProgressBar prgBar;
     private TextBox txtResult;
     private Button btnDownloadAndDisplayAsync;
+    private TextBox txtExecutionTime;
+    private Label label1;
 }

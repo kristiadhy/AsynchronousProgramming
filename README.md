@@ -1,6 +1,6 @@
 ## Asynchronous Programming
 - There is often a misunderstanding in the concept of asynchronous programming. In this project, I am trying to create an example of the correct usage of asynchronous programming and how this concept can benefit our project.
-- I use Tim Corey's approach of asynchronous programming here with a little tweaking to the code especially on the using of parallel async.
+- I apply Tim Corey's method of asynchronous programming here with a few modifications to the code, particularly in utilizing parallel async. I'm not saying that my approach is better, but I simply want to explore async programming from a different perspective and understand this concept better.
 - This project is self-documented. Inside this project you will find many comments explaining how the code behave.
 
 I want to highlight this code blocks where I implemented the parallel async.

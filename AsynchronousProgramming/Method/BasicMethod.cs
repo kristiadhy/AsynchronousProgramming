@@ -6,7 +6,7 @@ internal static class BasicMethod
     public static List<string> InitializeData()
     {
         List<string> websiteUrl = [
-        "https://www.yahoo.com",
+        "https://www.bbc.com/news",
         "https://www.google.com",
         "https://www.microsoft.com",
         "https://www.amazon.com",
@@ -27,10 +27,10 @@ internal static class BasicMethod
         int progressPercentage = 0;
 
         //Loop the initialized website urls
-        //1.Yahoo
+        //1.BBC
         //2.Google
         //3.Microsoft
-        //4.Cnn
+        //4.Amazon
         //...
         foreach (string websiteUrl in websiteUrlList)
         {

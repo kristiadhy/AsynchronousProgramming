@@ -13,39 +13,32 @@ public static async Task DownloadParallelAsync(IProgress<ProgressStatusReport> p
 {
     HttpClient client = new();
     List<string> websiteUrlList = InitializeData();
-    List<WebsiteModel> websiteList = new();
-    List<Task<WebsiteModel>> tasks = new();
+    List<WebsiteModel> websiteList = [];
+
     ProgressStatusReport progressStatus = new();
     progress.Report(progressStatus); //Trigger the progress update when data has no content so the progress bar will start from zero
     int progressPercentage = 0;
 
-    //Download website asynchronously from website url list and save the task to the IEnumerable
-    //Reference link: https://learn.microsoft.com/en-us/dotnet/csharp/asynchronous-programming/start-multiple-async-tasks-and-process-them-as-they-complete
-    IEnumerable<Task<WebsiteModel>> downloadWebsiteTaskFromQuery = from webisteUrl in websiteUrlList select DownloadWebsiteFromUrlAsync(webisteUrl, client);
-    //Set the task to list
-    List<Task<WebsiteModel>> downloadWebsiteTask = downloadWebsiteTaskFromQuery.ToList();
-
-    //Check if there are any website task in the list.
-    //We will remove the completed task from the list later on
-    while (downloadWebsiteTask.Any())
+    List<Task<WebsiteModel>> taskWebsiteModels = [];
+    foreach (string websiteUrl in websiteUrlList)
     {
-        //Here is how we check if there is any finished task
-        Task<WebsiteModel> finishedTask = await Task.WhenAny(downloadWebsiteTask);
-        //Get the website model of finished task
-        var websiteDownloaded = await finishedTask;
-        //Put website model to website list
-        websiteList.Add(websiteDownloaded);
+        //Get the result of each downloaded
+        var taskWebsiteModel = DownloadWebsiteFromUrlAsync(websiteUrl, client);
+        taskWebsiteModels.Add(taskWebsiteModel);
+    }
 
-        //Update the progress to set the value of progressStatus.PercentageComplete
-        //NOTE: We can get the downloaded count by using websiteList.Count(), but we want to separate the progressPercentage just to make it readable
+    while (taskWebsiteModels.Count > 0)
+    {
+        var finishedTask = await Task.WhenAny(taskWebsiteModels);
+        taskWebsiteModels.Remove(finishedTask);
+
+        var websiteContent = await finishedTask;
+        websiteList.Add(websiteContent);
+
         progressPercentage += 1;
         progressStatus.WebsiteDownloadedList = websiteList;
         progressStatus.PercentageComplete = (progressPercentage * 100) / websiteUrlList.Count;
-        //Report progress update, it will trigger the ProgressChanged event handler
         progress.Report(progressStatus);
-
-        //Remove finished task from the list
-        downloadWebsiteTask.Remove(finishedTask);
     }
 }
 ```
